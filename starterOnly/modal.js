@@ -12,6 +12,8 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
+const first = document.forms["reserve"]["first"];
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -25,90 +27,18 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-//validates form
-let formIsValid = validateFirstName() || validateLastName() || validateEmail() || validateBirthDate() || validateQuantity() || validateLocation() || validateTerms();
+// validate form inputs
+let isFormValid = false;
 
-function validateFirstName() {
-  //validates the input with name "first" in div class "formData"
-  let firstName = document.forms["reserve"]["first"].value;
-  // watches if filled out
-  if (firstName === "") {
-    return false;
+first.addEventListener('input', (e) => {
+  const isValid = e.target.checkValidity();
+  if (isValid) {
+    formData[0].removeAttribute('data-error-visible');
+    formData[0].setAttribute('data-error', '');
+    return isFormValid = true;
+  } else {
+    formData[0].setAttribute('data-error-visible', !isValid);
+    formData[0].setAttribute('data-error', 'Veuillez entrer entre 2 et 50 caractères pour le champ du prénom.');
+    return isFormValid = false;
   }
-  // watches if only letters
-  if (!/^[a-zA-Z]+$/.test(firstName)) {
-    return false;
-  }
-  // watches if more than 2 letters
-  if (firstName.length < 2) {
-    return false;
-  }
-  // watches if less than 25 letters
-  if (firstName.length > 25) {
-    return false;
-  }
-  return true;
-}
-
-function validateLastName() {
-  //validates the input with name "last" in div class "formData"
-  let lastName = document.forms["reserve"]["last"].value;
-  // watches if filled out
-  if (lastName === "") {
-    return false;
-  }
-  // watches if only letters
-  if (!/^[a-zA-Z]+$/.test(lastName)) {
-    return false;
-  }
-  // watches if more than 2 letters
-  if (lastName.length < 2) {
-    return false;
-  }
-  // watches if less than 25 letters
-  if (lastName.length > 25) {
-    return false;
-  }
-  return true;
-}
-
-function validateEmail() {
-  //validates the input with name "email" in div class "formData"
-  let email = document.forms["reserve"]["email"].value;
-  // watches if filled out
-  if (email === "") {
-    return false;
-  }
-  // watches if email is valid
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-}
-
-function validateBirthDate() {
-  //validates the input with name "birthdate" in div class "formData"
-  let birthDate = document.forms["reserve"]["birthdate"].value;
-  // watches if filled out
-  if (birthDate === "") {
-    return false;
-  }
-  // watches if date is valid
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(birthDate)) {
-    return false;
-  }
-  return true;
-}
-
-function validateQuantity() {
-  //validates the input with name "quantity" in div class "formData"
-  let quantity = document.forms["reserve"]["quantity"].value;
-  // watches if filled out
-  if (quantity === "") {
-    return false;
-  }
-  // watches if number is valid
-  if (!/^[0-9]+$/.test(quantity)) {
-    return false;
-  }
-  return true;
-}
-
+})

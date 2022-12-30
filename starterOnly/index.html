@@ -59,10 +59,13 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="validateForm();"
             >
               <div
-                class="formData">
+                class="formData"
+                id="firstFormData"
+                data-error-visible="false"
+              >
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -70,7 +73,7 @@
                   id="first"
                   name="first"
                   minlength="2"
-                  onsubmit="validateFirstName()"
+                  maxlength="50"
                 /><br>
               </div>
               <div
@@ -81,7 +84,6 @@
                   type="text"
                   id="last"
                   name="last"
-                  onsubmit="validateLastName()"
                 /><br>
               </div>
               <div
@@ -102,7 +104,6 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  onsubmit="validateBirthdate()"
                 /><br>
               </div>
               <div
@@ -190,15 +191,18 @@
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                <input
+                  class="checkbox-input"
+                  type="checkbox"
+                  id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
-                  Je Je souhaite être prévenu des prochains évènements.
+                  Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
               </div>
