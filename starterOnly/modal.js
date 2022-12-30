@@ -20,6 +20,11 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+// close modal form
+function closeModal() {
+  modalbg.style.display = "none";
+}
+
 //validates form
 let formIsValid = validateFirstName() || validateLastName() || validateEmail() || validateBirthDate() || validateQuantity() || validateLocation() || validateTerms();
 
@@ -122,3 +127,4 @@ function validateQuantity() {
   }
   return true;
 }
+
