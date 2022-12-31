@@ -32,19 +32,38 @@ function closeModal() {
 }
 
 // validate form inputs
-let isFormValid = false;
+let isFirstValid = false;
+let isLastValid = false;
+let isEmailValid = false;
+let isBirthdateValid = false;
+let isQuantityValid = false;
+
+function validateForm() {
+  let isFormValid = isFirstValid && isLastValid && isEmailValid && isBirthdateValid && isQuantityValid;
+  if (!isFormValid) {
+    document.getElementById("submit-button").classList.add("btn-submit-disabled");
+    return false;
+  }
+}
+
+function clearForm(num) {
+  formData[num].removeAttribute('data-error-visible');
+  formData[num].setAttribute('data-error', '');
+  document.getElementById("submit-button").classList.remove("btn-submit-disabled");
+}
 
 first.addEventListener('input', (e) => {
   let input = e.target.value;
   const regex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'-]{2,50}$/u;
 
   if (regex.test(input)) {
-    formData[0].removeAttribute('data-error-visible');
-    formData[0].setAttribute('data-error', '');
+    clearForm(0);
+    isFirstValid = true;
   }
   if (regex.test(input) === false) {
     formData[0].setAttribute('data-error-visible', 'true');
     formData[0].setAttribute('data-error', 'Veuillez entrer un prénom valide compris entre 2 et 50 caractères');
+    isFirstValid = false;
   }
 })
 last.addEventListener('input', (e) => {
@@ -52,12 +71,13 @@ last.addEventListener('input', (e) => {
   const regex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'-]{2,50}$/u;
 
   if (regex.test(input)) {
-    formData[1].removeAttribute('data-error-visible');
-    formData[1].setAttribute('data-error', '');
+    clearForm(1);
+    isLastValid = true;
   }
   if (regex.test(input) === false) {
     formData[1].setAttribute('data-error-visible', 'true');
     formData[1].setAttribute('data-error', 'Veuillez entrer un nom valide compris entre 2 et 50 caractères');
+    isLastValid = false;
   }
 })
 
@@ -66,12 +86,13 @@ email.addEventListener('input', (e) => {
   const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   if (regex.test(input)) {
-    formData[2].removeAttribute('data-error-visible');
-    formData[2].setAttribute('data-error', '');
+    clearForm(2);
+    isEmailValid = true;
   }
   if (regex.test(input) === false) {
     formData[2].setAttribute('data-error-visible', 'true');
     formData[2].setAttribute('data-error', 'Veuillez entrer une adresse email valide');
+    isEmailValid = false;
   }
 })
 
@@ -80,12 +101,13 @@ birthdate.addEventListener('input', (e) => {
   const regex = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
 
   if (regex.test(input)) {
-    formData[3].removeAttribute('data-error-visible');
-    formData[3].setAttribute('data-error', '');
+    clearForm(3);
+    isBirthdateValid = true;
   }
   if (regex.test(input) === false) {
     formData[3].setAttribute('data-error-visible', 'true');
     formData[3].setAttribute('data-error', 'Veuillez entrer une date de naissance valide');
+    isBirthdateValid = false;
   }
 })
 
@@ -94,12 +116,13 @@ quantity.addEventListener('input', (e) => {
   const regex = /^[0-9]{1,2}$/;
 
   if (regex.test(input)) {
-    formData[4].removeAttribute('data-error-visible');
-    formData[4].setAttribute('data-error', '');
+    clearForm(4);
+    isQuantityValid = true;
   }
   if (regex.test(input) === false) {
     formData[4].setAttribute('data-error-visible', 'true');
     formData[4].setAttribute('data-error', 'Veuillez entrer un nombre de tournois valide');
+    isQuantityValid = false;
   }
 })
 

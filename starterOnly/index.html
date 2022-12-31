@@ -59,7 +59,7 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="validateForm();"
+              onsubmit="return validateForm();"
             >
               <div
                 class="formData"
@@ -68,6 +68,7 @@
               >
                 <label for="first">Prénom</label><br>
                 <input
+                  required
                   class="text-control"
                   type="text"
                   id="first"
@@ -80,16 +81,20 @@
                 class="formData">
                 <label for="last">Nom</label><br>
                 <input
+                  required
                   class="text-control"
                   type="text"
                   id="last"
                   name="last"
+                  minlength="2"
+                  maxlength="50"
                 /><br>
               </div>
               <div
                 class="formData">
                 <label for="email">E-mail</label><br>
                 <input
+                  required
                   class="text-control"
                   type="email"
                   id="email"
@@ -100,6 +105,7 @@
                 class="formData">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
+                  required
                   class="text-control"
                   type="date"
                   id="birthdate"
@@ -116,6 +122,7 @@
                 class="formData"
               >
                 <input
+                  checked
                   class="checkbox-input"
                   type="radio"
                   id="location1"
@@ -207,6 +214,7 @@
                 <br>
               </div>
               <input
+                id="submit-button"
                 class="button btn-submit"
                 type="submit"
                 value="C'est parti"
