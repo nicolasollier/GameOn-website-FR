@@ -41,7 +41,7 @@ let isQuantityValid = false;
 function validateForm() {
   let isFormValid = isFirstValid && isLastValid && isEmailValid && isBirthdateValid && isQuantityValid;
   if (!isFormValid) {
-    document.getElementById("submit-button").classList.add("btn-submit-disabled");
+    document.getElementById("submit-button").classList.add("disabled");
     return false;
   }
 }
@@ -49,7 +49,12 @@ function validateForm() {
 function clearForm(num) {
   formData[num].removeAttribute('data-error-visible');
   formData[num].setAttribute('data-error', '');
-  document.getElementById("submit-button").classList.remove("btn-submit-disabled");
+  document.getElementById("submit-button").classList.remove("disabled");
+}
+
+function triggerFormError(num, message) {
+  formData[num].setAttribute('data-error-visible', 'true');
+  formData[num].setAttribute('data-error', message);
 }
 
 first.addEventListener('input', (e) => {
@@ -61,8 +66,7 @@ first.addEventListener('input', (e) => {
     isFirstValid = true;
   }
   if (regex.test(input) === false) {
-    formData[0].setAttribute('data-error-visible', 'true');
-    formData[0].setAttribute('data-error', 'Veuillez entrer un prénom valide compris entre 2 et 50 caractères');
+    triggerFormError(0, 'Veuillez entrer un prénom valide compris entre 2 et 50 caractères');
     isFirstValid = false;
   }
 })
@@ -75,8 +79,7 @@ last.addEventListener('input', (e) => {
     isLastValid = true;
   }
   if (regex.test(input) === false) {
-    formData[1].setAttribute('data-error-visible', 'true');
-    formData[1].setAttribute('data-error', 'Veuillez entrer un nom valide compris entre 2 et 50 caractères');
+    triggerFormError(1, 'Veuillez entrer un nom valide compris entre 2 et 50 caractères');
     isLastValid = false;
   }
 })
@@ -90,8 +93,7 @@ email.addEventListener('input', (e) => {
     isEmailValid = true;
   }
   if (regex.test(input) === false) {
-    formData[2].setAttribute('data-error-visible', 'true');
-    formData[2].setAttribute('data-error', 'Veuillez entrer une adresse email valide');
+    triggerFormError(2, 'Veuillez entrer une adresse email valide');
     isEmailValid = false;
   }
 })
@@ -105,8 +107,7 @@ birthdate.addEventListener('input', (e) => {
     isBirthdateValid = true;
   }
   if (regex.test(input) === false) {
-    formData[3].setAttribute('data-error-visible', 'true');
-    formData[3].setAttribute('data-error', 'Veuillez entrer une date de naissance valide');
+    triggerFormError(3, 'Veuillez entrer une date de naissance valide');
     isBirthdateValid = false;
   }
 })
@@ -120,8 +121,7 @@ quantity.addEventListener('input', (e) => {
     isQuantityValid = true;
   }
   if (regex.test(input) === false) {
-    formData[4].setAttribute('data-error-visible', 'true');
-    formData[4].setAttribute('data-error', 'Veuillez entrer un nombre de tournois valide');
+    triggerFormError(4, 'Veuillez entrer un nombre de tournois valide');
     isQuantityValid = false;
   }
 })
