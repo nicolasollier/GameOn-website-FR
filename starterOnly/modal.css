@@ -496,6 +496,7 @@ input.disabled {
     height: 100%;
     display: block;
     padding: 0;
+    object-fit: cover;
 }
 
 .copyrights {
