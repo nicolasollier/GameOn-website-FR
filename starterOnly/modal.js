@@ -1,5 +1,5 @@
 function editNav() {
-  var x = document.getElementById("myTopnav");
+  let x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -29,101 +29,77 @@ function launchModal() {
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
+  resetForm();
 }
-
-// validate form inputs
-let isFirstValid = false;
-let isLastValid = false;
-let isEmailValid = false;
-let isBirthdateValid = false;
-let isQuantityValid = false;
+// Validates form
+isFormValid = true;
 
 function validateForm() {
-  let isFormValid = isFirstValid && isLastValid && isEmailValid && isBirthdateValid && isQuantityValid;
-  if (!isFormValid) {
-    document.getElementById("submit-button").classList.add("disabled");
-    return false;
+  if (first.value === '') {
+    triggerFormError(first, 'Veuillez entrer votre prénom');
+    isFormValid = false;
   }
+
+  if (/^[a-z ,.'-]+$/i.test(first.value) === false) {
+    triggerFormError(first, 'Veuillez entrer un prénom valide');
+    isFormValid = false;
+  }
+
+  if (last.value === '') {
+    triggerFormError(last, 'Veuillez entrer votre nom');
+    isFormValid = false;
+  }
+
+  if (/^[a-z ,.'-]+$/i.test(last.value) === false) {
+    triggerFormError(last, 'Veuillez entrer un nom valide');
+    isFormValid = false;
+  }
+
+  if (email.value === '') {
+    triggerFormError(email, 'Veuillez entrer votre email');
+    isFormValid = false;
+  }
+
+  if (/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(email.value) === false) {
+    triggerFormError(email, 'Veuillez entrer un email valide');
+    isFormValid = false;
+  }
+
+  if (birthdate.value === '') {
+    triggerFormError(birthdate, 'Veuillez entrer votre date de naissance');
+    isFormValid = false;
+  }
+
+  //@TODO: Find way to validate date format in dd-mm-yyyy
+
+  if (quantity.value === '') {
+    triggerFormError(quantity, 'Veuillez entrer le nombre de tournois');
+    isFormValid = false;
+  }
+
+  if (/^[0-9]+$/.test(quantity.value) === false) {
+    triggerFormError(quantity, 'Veuillez entrer un nombre valide');
+    isFormValid = false;
+  }
+
+  if (document.getElementById('checkbox1').checked === false) {
+    triggerFormError(document.getElementById('checkbox1'), 'Veuillez accepter les conditions');
+    isFormValid = false;
+  }
+
+  return isFormValid;
 }
 
-function clearForm(num) {
-  formData[num].removeAttribute('data-error-visible');
-  formData[num].setAttribute('data-error', '');
-  document.getElementById("submit-button").classList.remove("disabled");
+function triggerFormError(element, message) {
+  element.parentNode.setAttribute('data-error-visible', 'true');
+  element.parentNode.setAttribute('data-error', message);
 }
 
-function triggerFormError(num, message) {
-  formData[num].setAttribute('data-error-visible', 'true');
-  formData[num].setAttribute('data-error', message);
+function resetForm() {
+  document.getElementById('reserve').reset();
 }
 
-first.addEventListener('input', (e) => {
-  let input = e.target.value;
-  const regex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'-]{2,50}$/u;
-
-  if (regex.test(input)) {
-    clearForm(0);
-    isFirstValid = true;
-  }
-  if (regex.test(input) === false) {
-    triggerFormError(0, 'Veuillez entrer un prénom valide compris entre 2 et 50 caractères');
-    isFirstValid = false;
-  }
-})
-last.addEventListener('input', (e) => {
-  let input = e.target.value;
-  const regex = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð'-]{2,50}$/u;
-
-  if (regex.test(input)) {
-    clearForm(1);
-    isLastValid = true;
-  }
-  if (regex.test(input) === false) {
-    triggerFormError(1, 'Veuillez entrer un nom valide compris entre 2 et 50 caractères');
-    isLastValid = false;
-  }
-})
-
-email.addEventListener('input', (e) => {
-  let input = e.target.value;
-  const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-  if (regex.test(input)) {
-    clearForm(2);
-    isEmailValid = true;
-  }
-  if (regex.test(input) === false) {
-    triggerFormError(2, 'Veuillez entrer une adresse email valide');
-    isEmailValid = false;
-  }
-})
-
-birthdate.addEventListener('input', (e) => {
-  let input = e.target.value;
-  const regex = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
-
-  if (regex.test(input)) {
-    clearForm(3);
-    isBirthdateValid = true;
-  }
-  if (regex.test(input) === false) {
-    triggerFormError(3, 'Veuillez entrer une date de naissance valide');
-    isBirthdateValid = false;
-  }
-})
-
-quantity.addEventListener('input', (e) => {
-  let input = e.target.value;
-  const regex = /^[0-9]{1,2}$/;
-
-  if (regex.test(input)) {
-    clearForm(4);
-    isQuantityValid = true;
-  }
-  if (regex.test(input) === false) {
-    triggerFormError(4, 'Veuillez entrer un nombre de tournois valide');
-    isQuantityValid = false;
-  }
-})
-
-
+function clearInputErrors(input) {
+  input.parentNode.setAttribute('data-error-visible', 'false');
+  isFormValid = true;
+}
