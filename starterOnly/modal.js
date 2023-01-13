@@ -35,6 +35,9 @@ function closeModal() {
 isFormValid = true;
 
 function validateForm() {
+  let now = new Date();
+  let birthdateObj = new Date(birthdate.value);
+
   if (first.value === '') {
     triggerFormError(first, 'Veuillez entrer votre prénom');
     isFormValid = false;
@@ -70,7 +73,10 @@ function validateForm() {
     isFormValid = false;
   }
 
-  //@TODO: Find way to validate date format in dd-mm-yyyy
+  if (birthdateObj > now) {
+    triggerFormError(birthdate, 'Veuillez entrer une date de naissance correcte');
+    isFormValid = false;
+  }
 
   if (quantity.value === '') {
     triggerFormError(quantity, 'Veuillez entrer le nombre de tournois');
