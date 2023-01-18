@@ -71,6 +71,12 @@ img {
     display: none;
 }
 
+@media screen and (max-width: 950px) {
+    .hero-headline {
+        font-size: 5rem!important;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .topnav a {
         display: none;
@@ -573,4 +579,5 @@ footer {
         opacity: 1;
     }
 }
+
 
