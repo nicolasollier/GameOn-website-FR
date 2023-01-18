@@ -34,7 +34,9 @@ function closeModal() {
 // Validates form
 isFormValid = true;
 
-function validateForm() {
+function validateForm(e) {
+  e.preventDefault();
+
   let now = new Date();
   let birthdateObj = new Date(birthdate.value);
 
@@ -93,7 +95,10 @@ function validateForm() {
     isFormValid = false;
   }
 
-  return isFormValid;
+  if (isFormValid) {
+    document.getElementById('reserve').style.display = 'none';
+    document.getElementById('confirmation').style.display = 'block';
+  }
 }
 
 function triggerFormError(element, message) {
