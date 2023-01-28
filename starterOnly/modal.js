@@ -36,7 +36,7 @@ isFormValid = true;
 
 function validateForm(e) {
   e.preventDefault();
-
+  
   let now = new Date();
   let birthdateObj = new Date(birthdate.value);
 
@@ -97,7 +97,7 @@ function validateForm(e) {
 
   if (isFormValid) {
     document.getElementById('reserve').style.display = 'none';
-    document.getElementById('confirmation').style.display = 'block';
+    document.getElementById('confirmation').style.display = 'flex';
   }
 }
 
@@ -114,3 +114,5 @@ function clearInputErrors(input) {
   input.parentNode.setAttribute('data-error-visible', 'false');
   isFormValid = true;
 }
+
+document.querySelector('form').addEventListener("submit", validateForm)

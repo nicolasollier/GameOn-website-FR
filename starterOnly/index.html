@@ -54,7 +54,7 @@
       <div class="bground">
         <div class="content">
           <span class="close" onclick="closeModal()"></span>
-          <div class="confirmation-message">
+          <div id="confirmation" class="confirmation-message">
             <h2 class="confirmation-headline">Merci pour votre inscription !</h2>
             <button class="button btn-submit">Fermer</button>
           </div>
@@ -65,7 +65,6 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validateForm(e);"
             >
               <div
                 class="formData"
