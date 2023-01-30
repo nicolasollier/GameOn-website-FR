@@ -82,7 +82,7 @@ img {
 
     .content {
         margin: 110px 0 0 0!important;
-        height: 100vh;
+        height: 100%;
         max-width: none!important;
     }
 
@@ -233,13 +233,13 @@ main {
     display: none;
     justify-content: space-between;
     flex-direction: column;
-    height: 320px;
+    height: 420px;
     padding: 30px 20px;
     text-align: center;
 }
 
 .confirmation-message, h2 {
-    margin-top: 30px;
+    margin-top: 15%;
 }
 
 label {
@@ -283,6 +283,10 @@ input {
 
 .formData[data-error-visible="true"] .text-control {
     border: 2px solid #e54858;
+}
+
+.formData:last-child {
+    margin-bottom: 30px;
 }
 
 .checkbox-label,

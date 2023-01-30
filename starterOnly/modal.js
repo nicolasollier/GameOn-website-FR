@@ -28,7 +28,17 @@ function launchModal() {
 
 // close modal form
 function closeModal() {
+  document.getElementById('reserve').style.display = 'block';
+  document.getElementById('confirmation').style.display = 'none';
   modalbg.style.display = "none";
+
+  //select all inputs
+  const inputs = document.querySelectorAll('input');
+  //loop through inputs and apply clearInputErrors
+  inputs.forEach(input => {
+    clearInputErrors(input);
+  });
+
   resetForm();
 }
 // Validates form
