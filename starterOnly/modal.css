@@ -76,6 +76,10 @@ img {
 }
 
 @media screen and (max-width: 768px) {
+    .hero-section {
+        margin-top: 110px;
+    }
+
     .content {
         margin: 110px 0 0 0!important;
         height: 100vh;
