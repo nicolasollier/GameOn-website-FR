@@ -58,6 +58,7 @@ img {
 .topnav a:hover {
     background-color: #ff0000;
     color: #ffffff;
+    text-decoration: underline;
     border-radius: 15px;
 }
 
