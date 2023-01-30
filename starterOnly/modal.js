@@ -122,6 +122,7 @@ function resetForm() {
 
 function clearInputErrors(input) {
   input.parentNode.setAttribute('data-error-visible', 'false');
+  input.parentNode.setAttribute('data-error', '');
   isFormValid = true;
 }
 
