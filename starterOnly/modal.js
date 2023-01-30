@@ -85,7 +85,7 @@ function validateForm(e) {
     isFormValid = false;
   }
 
-  if (birthdateObj > now) {
+  if (birthdateObj > now || birthdateObj < new Date(1923, 1, 1)) {
     triggerFormError(birthdate, 'Veuillez entrer une date de naissance correcte');
     isFormValid = false;
   }
