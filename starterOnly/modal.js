@@ -18,6 +18,11 @@ const email = document.forms["reserve"]["email"];
 const birthdate = document.forms["reserve"]["birthdate"];
 const quantity = document.forms["reserve"]["quantity"];
 
+// REGEX
+const nameRegex = /^[a-z ,.'-]+$/i;
+const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+const quantityRegex = /^[0-9]+$/;
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
@@ -28,6 +33,7 @@ function launchModal() {
 
 // close modal form
 function closeModal() {
+  //switch displays between reserve form and confirmation modal
   document.getElementById('reserve').style.display = 'block';
   document.getElementById('confirmation').style.display = 'none';
   modalbg.style.display = "none";
@@ -55,7 +61,7 @@ function validateForm(e) {
     isFormValid = false;
   }
 
-  if (/^[a-z ,.'-]+$/i.test(first.value) === false) {
+  if (nameRegex.test(first.value) === false) {
     triggerFormError(first, 'Veuillez entrer un prénom valide');
     isFormValid = false;
   }
@@ -65,7 +71,7 @@ function validateForm(e) {
     isFormValid = false;
   }
 
-  if (/^[a-z ,.'-]+$/i.test(last.value) === false) {
+  if (nameRegex.test(last.value) === false) {
     triggerFormError(last, 'Veuillez entrer un nom valide');
     isFormValid = false;
   }
@@ -75,7 +81,7 @@ function validateForm(e) {
     isFormValid = false;
   }
 
-  if (/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/.test(email.value) === false) {
+  if (emailRegex.test(email.value) === false) {
     triggerFormError(email, 'Veuillez entrer un email valide');
     isFormValid = false;
   }
@@ -95,7 +101,7 @@ function validateForm(e) {
     isFormValid = false;
   }
 
-  if (/^[0-9]+$/.test(quantity.value) === false) {
+  if (quantityRegex.test(quantity.value) === false) {
     triggerFormError(quantity, 'Veuillez entrer un nombre valide');
     isFormValid = false;
   }
