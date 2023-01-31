@@ -75,6 +75,21 @@ img {
     display: none;
 }
 
+@media only screen and (min-device-width: 800px) and (max-device-width: 970px) {
+    .modal-btn {
+        white-space: nowrap;
+    }
+
+    .hero-headline {
+        font-size: 5rem!important;
+    }
+
+    .hero-text {
+        position: relative!important;
+        width: 280%!important;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .hero-section {
         margin-top: 110px;
