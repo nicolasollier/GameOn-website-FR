@@ -120,7 +120,7 @@
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" oninput="clearInputErrors(this)">
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
@@ -133,6 +133,7 @@
                   id="location1"
                   name="location"
                   value="New York"
+                  onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
@@ -144,6 +145,7 @@
                   id="location2"
                   name="location"
                   value="San Francisco"
+                  onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox-label" for="location2">
                   <span class="checkbox-icon"></span>
@@ -155,6 +157,7 @@
                   id="location3"
                   name="location"
                   value="Seattle"
+                  onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox-label" for="location3">
                   <span class="checkbox-icon"></span>
@@ -166,6 +169,7 @@
                   id="location4"
                   name="location"
                   value="Chicago"
+                  onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox-label" for="location4">
                   <span class="checkbox-icon"></span>
@@ -177,6 +181,7 @@
                   id="location5"
                   name="location"
                   value="Boston"
+                  onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox-label" for="location5">
                   <span class="checkbox-icon"></span>
@@ -188,6 +193,7 @@
                   id="location6"
                   name="location"
                   value="Portland"
+                  onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox-label" for="location6">
                   <span class="checkbox-icon"></span>
@@ -201,7 +207,6 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
                   onclick="clearInputErrors(this)"
                 />
                 <label class="checkbox2-label" for="checkbox1">
@@ -212,7 +217,9 @@
                 <input
                   class="checkbox-input"
                   type="checkbox"
-                  id="checkbox2" />
+                  id="checkbox2"
+                  onclick="clearInputErrors(this)"
+                />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.

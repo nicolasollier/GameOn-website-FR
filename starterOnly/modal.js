@@ -17,13 +17,14 @@ const last = document.forms["reserve"]["last"];
 const email = document.forms["reserve"]["email"];
 const birthdate = document.forms["reserve"]["birthdate"];
 const quantity = document.forms["reserve"]["quantity"];
+const inputs = document.querySelectorAll('input');
 
 // REGEX
 const nameRegex = /^[a-z ,.'-]+$/i;
 const emailRegex = /^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
 const quantityRegex = /^[0-9]+$/;
 
-// launch modal event
+// Launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
@@ -31,16 +32,14 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal form
+// Close modal form
 function closeModal() {
   //switch displays between reserve form and confirmation modal
   document.getElementById('reserve').style.display = 'block';
   document.getElementById('confirmation').style.display = 'none';
   modalbg.style.display = "none";
 
-  //select all inputs
-  const inputs = document.querySelectorAll('input');
-  //loop through inputs and apply clearInputErrors
+  // Loop through inputs and apply clearInputErrors
   inputs.forEach(input => {
     clearInputErrors(input);
   });
@@ -56,18 +55,8 @@ function validateForm(e) {
   let now = new Date();
   let birthdateObj = new Date(birthdate.value);
 
-  if (first.value === '') {
-    triggerFormError(first, 'Veuillez entrer votre prénom');
-    isFormValid = false;
-  }
-
   if (nameRegex.test(first.value) === false) {
     triggerFormError(first, 'Veuillez entrer un prénom valide');
-    isFormValid = false;
-  }
-
-  if (last.value === '') {
-    triggerFormError(last, 'Veuillez entrer votre nom');
     isFormValid = false;
   }
 
@@ -76,28 +65,13 @@ function validateForm(e) {
     isFormValid = false;
   }
 
-  if (email.value === '') {
-    triggerFormError(email, 'Veuillez entrer votre email');
-    isFormValid = false;
-  }
-
   if (emailRegex.test(email.value) === false) {
     triggerFormError(email, 'Veuillez entrer un email valide');
     isFormValid = false;
   }
 
-  if (birthdate.value === '') {
-    triggerFormError(birthdate, 'Veuillez entrer votre date de naissance');
-    isFormValid = false;
-  }
-
   if (birthdateObj > now || birthdateObj < new Date(1923, 1, 1)) {
     triggerFormError(birthdate, 'Veuillez entrer une date de naissance correcte');
-    isFormValid = false;
-  }
-
-  if (quantity.value === '') {
-    triggerFormError(quantity, 'Veuillez entrer le nombre de tournois');
     isFormValid = false;
   }
 
@@ -110,6 +84,14 @@ function validateForm(e) {
     triggerFormError(document.getElementById('checkbox1'), 'Veuillez accepter les conditions');
     isFormValid = false;
   }
+
+  // Check if inputs are not empty
+  inputs.forEach(input => {
+    if (input.value === "") {
+      triggerFormError(input, 'Ce champ est obligatoire');
+      isFormValid = false;
+    }
+  });
 
   if (isFormValid) {
     document.getElementById('reserve').style.display = 'none';
