@@ -17,6 +17,7 @@ const last = document.forms["reserve"]["last"];
 const email = document.forms["reserve"]["email"];
 const birthdate = document.forms["reserve"]["birthdate"];
 const quantity = document.forms["reserve"]["quantity"];
+const locations = document.forms["reserve"]["location"];
 const inputs = document.querySelectorAll('input');
 
 // REGEX
@@ -77,6 +78,11 @@ function validateForm(e) {
 
   if (quantityRegex.test(quantity.value) === false) {
     triggerFormError(quantity, 'Veuillez entrer un nombre valide');
+    isFormValid = false;
+  }
+
+  if (locations.value === "") {
+    triggerFormError(locations[0], 'Veuillez choisir une ville');
     isFormValid = false;
   }
 
